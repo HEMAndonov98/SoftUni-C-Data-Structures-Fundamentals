@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "Problem01.List/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Problem01.List.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Problem01.List.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Problem01.List/1.0.0": {
+      "type": "project",
+      "path": "../Problem01.List/Problem01.List.csproj",
+      "msbuildProject": "../Problem01.List/Problem01.List.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "Problem01.List >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/hristoandonov/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Volumes/Extreme SSD/SoftUni C# Data Structures Fundamentals/Linear Data-Structures Lab/TestEnviorment/TestEnviorment.csproj",
+      "projectName": "TestEnviorment",
+      "projectPath": "/Volumes/Extreme SSD/SoftUni C# Data Structures Fundamentals/Linear Data-Structures Lab/TestEnviorment/TestEnviorment.csproj",
+      "packagesPath": "/Users/hristoandonov/.nuget/packages/",
+      "outputPath": "/Volumes/Extreme SSD/SoftUni C# Data Structures Fundamentals/Linear Data-Structures Lab/TestEnviorment/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/hristoandonov/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {
+            "/Volumes/Extreme SSD/SoftUni C# Data Structures Fundamentals/Linear Data-Structures Lab/Problem01.List/Problem01.List.csproj": {
+              "projectPath": "/Volumes/Extreme SSD/SoftUni C# Data Structures Fundamentals/Linear Data-Structures Lab/Problem01.List/Problem01.List.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
