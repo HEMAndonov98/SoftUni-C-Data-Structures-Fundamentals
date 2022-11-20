@@ -4,14 +4,16 @@ internal class Program
     private static void Main(string[] args)
     {
         {
-            var expected = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            var list = new Problem01.List.List<int>();
-            int itemToRemove = expected[expected.Length / 2];
-            foreach (var num in expected)
+            var testarr = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var myStack = new Problem02.Stack.Stack<int>();
+            var builtInStack = new Stack<int>();
+
+            foreach (var item in testarr)
             {
-                list.Add(num);
+                myStack.Push(item);
+                builtInStack.Push(item);
             }
-            list.Remove(itemToRemove);
+            Console.WriteLine();
         }
     }
 }
