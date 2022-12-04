@@ -1,18 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Problem01.CircularQueue;
+﻿using Problem03.ReversedList;
 
-var array = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-var realQueue = new Queue<int>();
-var myQueue = new CircularQueue<int>();
-
-foreach (var num in array)
+var list = new ReversedList<int>();
+var numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+int itemToRemove = numbers[numbers.Length / 2];
+foreach (var num in numbers)
 {
-    realQueue.Enqueue(num);
-    myQueue.Enqueue(num);
+    list.Add(num);
 }
+list.RemoveAt(3);
 
-foreach (var val in myQueue)
-{
-    Console.WriteLine(val);
-}
+
+Console.WriteLine();

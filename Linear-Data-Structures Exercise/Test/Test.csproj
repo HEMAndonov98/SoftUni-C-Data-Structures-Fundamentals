@@ -9,5 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\01.FasterQueue\01.CircularQueue.csproj" />
+    <ProjectReference Include="..\03.ReversedList\03.ReversedList.csproj" />
   </ItemGroup>
 </Project>
