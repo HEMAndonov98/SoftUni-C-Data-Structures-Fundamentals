@@ -40,17 +40,55 @@
 
         public void ForEachInOrder(Action<T> action)
         {
-            throw new NotImplementedException();
+            if (this.LeftChild != null)
+            {
+                this.LeftChild.ForEachInOrder(action);
+            }
+
+            action.Invoke(this.Value);
+
+            if (this.RightChild != null)
+            {
+                this.RightChild.ForEachInOrder(action);
+            }
         }
 
         public IEnumerable<IAbstractBinaryTree<T>> InOrder()
         {
-            throw new NotImplementedException();
+            var result = new List<IAbstractBinaryTree<T>>();
+
+            if (this.LeftChild != null)
+            {
+                result.AddRange(this.LeftChild.InOrder());
+            }
+
+            result.Add(this);
+
+            if (this.RightChild != null)
+            {
+                result.AddRange(this.RightChild.InOrder());
+            }
+
+            return result;
         }
 
         public IEnumerable<IAbstractBinaryTree<T>> PostOrder()
         {
-            throw new NotImplementedException();
+            var result = new List<IAbstractBinaryTree<T>>();
+
+            if (this.LeftChild != null)
+            {
+                result.AddRange(this.LeftChild.PostOrder());
+            }
+
+            if (this.RightChild != null)
+            {
+                result.AddRange(this.RightChild.PostOrder());
+            }
+
+            result.Add(this);
+
+            return result;
         }
 
         public  IEnumerable<IAbstractBinaryTree<T>> PreOrder()
