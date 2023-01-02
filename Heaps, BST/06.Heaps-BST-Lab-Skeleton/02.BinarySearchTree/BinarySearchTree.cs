@@ -1,6 +1,8 @@
 ﻿namespace _02.BinarySearchTree
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class BinarySearchTree<T> : IBinarySearchTree<T>
         where T : IComparable<T>
@@ -24,8 +26,28 @@
         {
         }
 
+        private BinarySearchTree(Node node)
+        {
+            this.PreOrederCopy(node);
+        }
+
+        private void PreOrederCopy(Node node)
+        {
+            this.Insert(node.Value);
+
+            if (node.LeftChild != null)
+            {
+                this.PreOrederCopy(node.LeftChild);
+            }
+
+            if (node.RightChild != null)
+            {
+                this.PreOrederCopy(node.RightChild);
+            }
+        }
+
         public bool Contains(T element)
-            //=> this.Contains(element, this.root) != null;
+            //=> this.Contains(element, this.root) != null (intuitive implementation by lecturer);
             => this.Contains2(element, this.root); //(this method I implemented uses recursion to find the node)//
 
         private Node Contains(T element, Node node)
@@ -69,7 +91,51 @@
 
         public void EachInOrder(Action<T> action)
         {
-            throw new NotImplementedException();
+            //this.EachInOrder(action, this.root) - recursive implementation;
+            foreach (var item in this.InOrder(this.root))
+            {
+                action.Invoke(item);
+            }
+        }
+
+        private IEnumerable<T> InOrder(Node root)
+        {
+            var result = new List<T>();
+
+            if (root.LeftChild != null)
+            {
+                foreach (var item in this.InOrder(root.LeftChild))
+                {
+                    result.Add(item);
+                }
+            }
+
+            result.Add(root.Value);
+
+            if (root.RightChild != null)
+            {
+                foreach (var item in this.InOrder(root.RightChild))
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
+        } //Intuitive implementaiton
+
+        private void EachInOrder(Action<T> action, Node node)
+        {
+            if (node.LeftChild != null)
+            {
+                this.EachInOrder(action, node.LeftChild);
+            }
+
+            action.Invoke(node.Value);
+
+            if (node.RightChild != null)
+            {
+                this.EachInOrder(action, node.RightChild);
+            }
         }
 
         public void Insert(T element)
@@ -97,7 +163,14 @@
 
         public IBinarySearchTree<T> Search(T element)
         {
-            throw new NotImplementedException();
+            var node = this.Contains(element, this.root);
+
+            if (node == null)
+            {
+                return null;
+            }
+
+            return new BinarySearchTree<T>(node);
         }
     }
 }
