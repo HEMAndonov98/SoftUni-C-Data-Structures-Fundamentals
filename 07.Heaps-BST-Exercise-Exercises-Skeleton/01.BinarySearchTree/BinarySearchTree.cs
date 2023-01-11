@@ -190,6 +190,7 @@
             return this.Count() - this.Rank(this.root, element);
         }
 
+        //To find how many elements are smaller than a given element we have to see how many elements are bigger than it
         private int Rank(Node node, T element)
         {
             if (node == null)
@@ -197,17 +198,21 @@
                 return 0;
             }
 
+            //Case: 1 the node is bigger than the searched element
             if (node.Value.CompareTo(element) > 0)
             {
-                return 1 + this.Count(node.Right) + this.Rank(node.Left, element);
+                //In this case we just sum all the elements to its right(including the current node)
+                return 1 + this.Count(node.Right) + this.Rank(node.Left, element);//We call the function recursively to add up all the elements bigger than the probided one
             }
+            //Case: 2 the node is smaller than the searched node
             else if (node.Value.CompareTo(element) < 0)
             {
+                //Because the node is smaller it is in the count of the smaller elements this is why we just call the function again to see if we're on the right node
                 return this.Rank(node.Right, element);
             }
             else
             {
-                return this.Count(node);
+                return  1 + this.Count(node.Right);
             }
         }
 
