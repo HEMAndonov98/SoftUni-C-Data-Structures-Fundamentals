@@ -56,17 +56,119 @@
 
         public void Delete(T element)
         {
-            throw new NotImplementedException();
+            if (this.root == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            this.root = this.Delete(this.root, element);
+        }
+
+        private Node Delete(Node node, T element)
+        {
+            //Base Case
+            if (node == null)
+            {
+                return node;
+            }
+
+            //If the node were one is bigger than the node we're looking for we recursively call the function by keeping the link between the nodes
+            if (node.Value.CompareTo(element) > 0)
+            {
+                node.Left = this.Delete(node.Left, element);
+            }
+            //in this case we do the same but return the recursive call from its right child
+            else if (node.Value.CompareTo(element) < 0)
+            {
+                node.Right = this.Delete(node.Right, element);
+            }
+            //in this case we have found the element
+            else
+            {
+                //case: 1 no children we just delete the node
+                if (node.Left == null && node.Right == null)
+                {
+                    return null;
+                }
+                //case: 2 we check if the node we're deleting has one child(either left or right)
+                else if (node.Left != null && node.Right == null)
+                {
+                    return node.Left;
+                }
+                else if (node.Left == null && node.Right != null)
+                {
+                    return node.Right;
+                }
+                //Case: 3 both children are present
+                else
+                {
+                    Node leftMax = this.FindLeftSuccessor(node.Left);
+
+                    node.Left = this.Delete(node.Left, leftMax.Value);
+
+                    leftMax.Left = node.Left;
+                    leftMax.Right = node.Right;
+
+                    node = leftMax;
+                }
+            }
+
+            return node;
+        }
+
+        private Node FindLeftSuccessor(Node node)
+        {
+            if (node.Right != null)
+            {
+                return this.FindLeftSuccessor(node.Right);
+            }
+            else if (node.Left != null)
+            {
+                return this.FindLeftSuccessor(node.Left);
+            }
+            else return node;
         }
 
         public void DeleteMax()
         {
-            throw new NotImplementedException();
+            if (this.root == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var biggestElement = this.root.Value;
+
+            Action<T> CompareElement = comparer =>
+            {
+                if (biggestElement.CompareTo(comparer) < 0)
+                {
+                    biggestElement = comparer;
+                }
+            };
+
+            this.EachInOrder(this.root.Right ,CompareElement);
+            this.Delete(biggestElement);
         }
 
         public void DeleteMin()
         {
-            throw new NotImplementedException();
+            if (this.root == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var smallestElement = this.root.Value;
+
+            Action<T> CompareElement = comparer =>
+            {
+                if (smallestElement.CompareTo(comparer) > 0)
+                {
+                    smallestElement = comparer;
+                }
+            };
+
+            this.EachInOrder(this.root.Left ,CompareElement);
+            this.Delete(smallestElement);
         }
 
         public int Count()
