@@ -173,9 +173,18 @@
 
         public int Count()
         {
-            throw new NotImplementedException();
+            return this.Count(this.root);
         }
 
+        private int Count(Node node)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+
+            return 1 + this.Count(node.Left) + this.Count(node.Right);
+        }
         public int Rank(T element)
         {
             throw new NotImplementedException();
