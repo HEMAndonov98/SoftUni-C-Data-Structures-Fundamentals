@@ -187,6 +187,8 @@
         }
         public int Rank(T element)
         {
+            //the internal Rank function returns the number of elements bigger than X
+            //so we just subtract the total count and the number of elements bigger than X to get the number of elements smaller than x
             return this.Count() - this.Rank(this.root, element);
         }
 
@@ -212,13 +214,43 @@
             }
             else
             {
+                //Here we have found the element so we just sum all the elements to its right plus this node so we can add them up recursively
                 return  1 + this.Count(node.Right);
             }
         }
 
         public T Select(int rank)
         {
-            throw new NotImplementedException();
+            Node currentNode = this.root;
+
+            if (currentNode == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            while (currentNode != null)
+            {
+                if (this.Rank(currentNode.Value) < rank)
+                {
+                    currentNode = currentNode.Right;
+                }
+                else if (this.Rank(currentNode.Value) > rank)
+                {
+                    currentNode = currentNode.Left;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (currentNode == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return currentNode.Value;
+
         }
 
         public T Ceiling(T element)
