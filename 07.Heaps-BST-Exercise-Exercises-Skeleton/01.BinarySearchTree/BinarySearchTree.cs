@@ -262,29 +262,58 @@
                 throw new InvalidOperationException();
             }
 
-            if (node.Right == null)
+            var returnValue = this.Ceiling(this.root, element).Value;
+
+            if (returnValue.CompareTo(element) < 0)
             {
                 throw new InvalidOperationException();
             }
 
-            while (node != null)
-            {
-                if (node.Left != null)
-                {
-                    node = node.Left;
-                }
-                else
-                {
-                    break;
-                }
-            }
+            return returnValue;
+        }
 
-            return node.Value;
+        private Node Ceiling(Node node, T element)
+        {
+            if (node.Left.Value.CompareTo(element) > 0)
+            {
+                return this.Ceiling(node.Left, element);
+            }
+            else if (node.Right.Value.CompareTo(element) < 0)
+            {
+                return this.Ceiling(node.Right, element);
+            }
+            else
+            {
+                return node;
+            }
         }
 
         public T Floor(T element)
         {
-            throw new NotImplementedException();
+            Node node = this.FindElement(element);
+
+            if (node == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return this.Floor(node.Left).Value;
+        }
+
+        private Node Floor(Node node)
+        {
+            if (node.Right != null)
+            {
+               return this.Floor(node.Right);
+            }
+            else if (node.Left != null)
+            {
+               return this.Floor(node.Left);
+            }
+            else
+            {
+                return node;
+            }
         }
 
         public IEnumerable<T> Range(T startRange, T endRange)
