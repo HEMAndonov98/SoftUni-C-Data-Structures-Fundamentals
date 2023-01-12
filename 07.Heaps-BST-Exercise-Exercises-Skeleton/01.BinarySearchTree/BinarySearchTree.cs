@@ -255,7 +255,31 @@
 
         public T Ceiling(T element)
         {
-            throw new NotImplementedException();
+            Node node = this.FindElement(element);
+
+            if (node == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (node.Right == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            while (node != null)
+            {
+                if (node.Left != null)
+                {
+                    node = node.Left;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return node.Value;
         }
 
         public T Floor(T element)
